@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "756233671537",
+    "project_id": "online-quiz-game-dce43",
+    "storage_bucket": "online-quiz-game-dce43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756233671537:android:a4ddc353cf35c4a6fe1cd0",
+        "android_client_info": {
+          "package_name": "com.example.online_quiz_game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756233671537-4930rqv0hqbqfmk3qvm3rrh9vi53pjal.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXITEheANOESVwMUmBqahu8-zKA-kHZrk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756233671537-4930rqv0hqbqfmk3qvm3rrh9vi53pjal.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
