@@ -24,6 +24,21 @@ mixin _$GameVM on _GameVMBase, Store {
     });
   }
 
+  final _$isClickedAtom = Atom(name: '_GameVMBase.isClicked');
+
+  @override
+  bool get isClicked {
+    _$isClickedAtom.reportRead();
+    return super.isClicked;
+  }
+
+  @override
+  set isClicked(bool value) {
+    _$isClickedAtom.reportWrite(value, super.isClicked, () {
+      super.isClicked = value;
+    });
+  }
+
   final _$answersAtom = Atom(name: '_GameVMBase.answers');
 
   @override
@@ -163,6 +178,7 @@ mixin _$GameVM on _GameVMBase, Store {
   String toString() {
     return '''
 jsonResponse: ${jsonResponse},
+isClicked: ${isClicked},
 answers: ${answers},
 i: ${i},
 initial: ${initial},

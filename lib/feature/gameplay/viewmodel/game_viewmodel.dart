@@ -20,6 +20,9 @@ abstract class _GameVMBase with Store {
   Question? jsonResponse;
 
   @observable
+  bool isClicked = false;
+
+  @observable
   var answers = [];
 
   @observable
@@ -74,6 +77,7 @@ abstract class _GameVMBase with Store {
 
   @action
   void checkAnswer(index) {
+    isClicked = !isClicked;
     answerCorrectness = [null, null, null, null];
     audioPlayer.stop();
     if (answers[index] + "1" == answers[5]) {
@@ -87,6 +91,7 @@ abstract class _GameVMBase with Store {
       }
     }
     Future.delayed(const Duration(seconds: 2), () {
+      isClicked = false;
       initial = 0.00005;
     });
   }

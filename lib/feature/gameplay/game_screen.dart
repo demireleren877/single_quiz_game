@@ -46,46 +46,51 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage(GamePlayConstants.bgPath), fit: BoxFit.cover),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(height: 30.h),
-            TimerWidget(gameVM: _gameVM),
-            SizedBox(height: 20.h),
-            QuestionBox(gameVM: _gameVM),
-            SizedBox(height: 30.h),
-            SizedBox(
-              height: 400.h,
-              child: ListView.builder(
-                padding: context.paddingLow,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return Padding(
+    return Observer(
+      builder: (a) => AbsorbPointer(
+        absorbing: _gameVM.isClicked,
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(GamePlayConstants.bgPath), fit: BoxFit.cover),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(height: 30.h),
+                TimerWidget(gameVM: _gameVM),
+                SizedBox(height: 20.h),
+                QuestionBox(gameVM: _gameVM),
+                SizedBox(height: 30.h),
+                SizedBox(
+                  height: 400.h,
+                  child: ListView.builder(
                     padding: context.paddingLow,
-                    child: GestureDetector(
-                      onTap: () {
-                        _gameVM.checkAnswer(index);
-                      },
-                      child: Observer(
-                        builder: (a) => AnswerBox(
-                          gameVM: _gameVM,
-                          order: index,
-                          correctness: _gameVM.answerCorrectness[index],
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 4,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: context.paddingLow,
+                        child: GestureDetector(
+                          onTap: () {
+                            _gameVM.checkAnswer(index);
+                          },
+                          child: Observer(
+                            builder: (a) => AnswerBox(
+                              gameVM: _gameVM,
+                              order: index,
+                              correctness: _gameVM.answerCorrectness[index],
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  );
-                },
-              ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

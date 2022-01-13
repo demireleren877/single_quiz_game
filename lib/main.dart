@@ -5,10 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:game/core/constants/color_constants.dart';
 import 'package:game/core/constants/hive_constants.dart';
-import 'package:game/feature/gameplay/game_screen.dart';
-import 'package:game/feature/home/home_screen.dart';
-import 'package:game/feature/results/result_screen.dart';
-import 'package:game/feature/splash/splash_screen.dart';
+import './feature/gameplay/game_screen.dart';
+import './feature/home/home_screen.dart';
+import './feature/results/result_screen.dart';
+import './feature/splash/splash_screen.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
