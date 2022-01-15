@@ -14,9 +14,10 @@ class ResultScreen extends StatelessWidget {
             child: Text(
               "Hope You Enjoyed!!!",
               style: TextStyle(
-                  fontSize: 30,
-                  color: AppColors.white,
-                  fontWeight: FontWeight.w600),
+                fontSize: 30,
+                color: AppColors.white,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],

@@ -3,10 +3,13 @@ import 'dart:convert';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:game/core/constants/api_constants.dart';
+import 'package:game/core/constants/hive_constants.dart';
 import 'package:game/core/constants/special_characters.dart';
 import 'package:game/core/models/question_model.dart';
+import 'package:game/core/services/firebase_services.dart';
 import 'package:game/feature/gameplay/constants.dart';
 import 'package:game/feature/results/result_screen.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobx/mobx.dart';
 part 'game_viewmodel.g.dart';
@@ -15,12 +18,16 @@ class GameVM = _GameVMBase with _$GameVM;
 
 abstract class _GameVMBase with Store {
   AudioPlayer audioPlayer = AudioPlayer();
+  final FirebaseServices _firebaseServices = FirebaseServices();
 
   @observable
   Question? jsonResponse;
 
   @observable
   bool isClicked = false;
+
+  @observable
+  double score = 0;
 
   @observable
   var answers = [];
@@ -83,6 +90,7 @@ abstract class _GameVMBase with Store {
     if (answers[index] + "1" == answers[5]) {
       answerCorrectness[index] = true;
       playSound(GamePlayConstants.trueSound);
+      score += 15;
     } else {
       playSound(GamePlayConstants.wrongSound);
       answerCorrectness[index] = false;
@@ -110,8 +118,15 @@ abstract class _GameVMBase with Store {
         if (i < questionNumber) {
           getAnswers();
         } else {
+          _firebaseServices.users
+              .doc(Hive.box(HiveConstants.boxName).getAt(0))
+              .set({"score": score});
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => const ResultScreen()));
+            context,
+            MaterialPageRoute(
+              builder: (_) => const ResultScreen(),
+            ),
+          );
           timer.cancel();
         }
         answerCorrectness = [null, null, null, null];

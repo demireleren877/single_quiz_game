@@ -19,9 +19,12 @@ abstract class _HomeVMBase with Store {
   @action
   void addUserName(context) {
     var box = Hive.box(HiveConstants.boxName);
-    FirebaseServices().users.add({"username": userName});
     userName.isNotEmpty
         ? box.add(userName).then((value) => Navigator.pop(context))
         : null;
+    FirebaseServices()
+        .users
+        .doc(Hive.box(HiveConstants.boxName).getAt(0))
+        .set({"username": userName});
   }
 }

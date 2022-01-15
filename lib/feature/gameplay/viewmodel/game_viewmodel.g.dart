@@ -39,6 +39,21 @@ mixin _$GameVM on _GameVMBase, Store {
     });
   }
 
+  final _$scoreAtom = Atom(name: '_GameVMBase.score');
+
+  @override
+  double get score {
+    _$scoreAtom.reportRead();
+    return super.score;
+  }
+
+  @override
+  set score(double value) {
+    _$scoreAtom.reportWrite(value, super.score, () {
+      super.score = value;
+    });
+  }
+
   final _$answersAtom = Atom(name: '_GameVMBase.answers');
 
   @override
@@ -179,6 +194,7 @@ mixin _$GameVM on _GameVMBase, Store {
     return '''
 jsonResponse: ${jsonResponse},
 isClicked: ${isClicked},
+score: ${score},
 answers: ${answers},
 i: ${i},
 initial: ${initial},
